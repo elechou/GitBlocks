@@ -1,15 +1,15 @@
-## **Leetcode Blocks for CoreInk**
+## **Leetcode Calendar for CoreInk**
 
-A CoreInk project to show your Leetcode submission calendar.
+This project uses the M5Stack CoreInk to show daily LeetCode submission activity on an e-ink screen.
 
 ## **Introduction**
 
-This project is for [M5Stack CoreInk](https://docs.m5stack.com/en/core/coreink).
-I’ve always enjoyed monitoring the progress of my tasks, as it gives me a sense of accomplishment.
-This led me to wonder if I could extract my submission activity from LeetCode and display it. Since this type of update doesn’t need to be frequent, refreshing once a day is more than enough — an e-ink screen is an ideal fit for this purpose.
-The current functionality includes:
-1. Automatically fetching recent submission records from LeetCode CN (no account login required).
-2. Updates every 4 hours (the maximum sleep interval allowed by CoreInk's API).
+This project is designed for the [M5Stack CoreInk](https://docs.m5stack.com/en/core/coreink).
+I enjoy tracking my working progress — it’s motivating to see the work accumulate over time. That lead me to build a dashboard on my desk to check my LeetCode progress. Since LeetCode submission data doesn’t change frequently, updating once a day is more than enough. The low-power, always-visible nature of an e-ink display makes it a great fit for this kind of passive tracking.
+
+The current features includes:
+1. Automatically fetching recent submission records from LeetCode CN (No account login required).
+2. Updates every 4 hours. (The maximum sleep interval allowed by CoreInk's API).
 
 ### **Screenshot:**
 
