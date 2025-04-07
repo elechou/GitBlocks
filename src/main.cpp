@@ -73,7 +73,7 @@ String fetch_leetcode_submissions(String username) {
   if (httpResponseCode > 0) {
     payload = http.getString();
   } else {
-    payload = "Error in HTTP request." + String(httpResponseCode);
+    payload = "Error";
   }
 
   http.end();
@@ -111,11 +111,17 @@ void setup(void) {
   auto date = M5.Rtc.getDate();
 
   // 获取LeetCode提交数据
+  JsonDocument doc;
   String response = fetch_leetcode_submissions(USERNAME);
   // 测试用数据
   // String response = "{\"data\":{\"userCalendar\":{\"streak\":6,\"totalActiveDays\":40,\"submissionCalendar\":\'{\"1728950400\":4,\"1729036800\":5,\"1729296000\":1,\"1729382400\":4,\"1729468800\":1,\"1729555200\":1,\"1729728000\":3,\"1729814400\":13,\"1729900800\":2,\"1729987200\":2,\"1730073600\":6,\"1730160000\":2,\"1730332800\":4,\"1730764800\":4,\"1731628800\":1,\"1731715200\":2,\"1731974400\":5,\"1732060800\":3,\"1733270400\":7,\"1739664000\":4,\"1739750400\":3,\"1740355200\":3,\"1740441600\":3,\"1740528000\":1,\"1740700800\":2,\"1740787200\":2,\"1740873600\":3,\"1740960000\":4,\"1741132800\":1,\"1741219200\":3,\"1741305600\":3,\"1741392000\":1,\"1741651200\":2,\"1741737600\":2,\"1741824000\":1,\"1741910400\":2,\"1742083200\":2,\"1742169600\":2,\"1742256000\":5,\"1742428800\":13}\'}}}";
-  JsonDocument doc;
   deserializeJson(doc, response);
+
+  if (doc["data"]["userCalendar"]["submissionCalendar"].isNull()) {
+    delay(1000);
+    response = fetch_leetcode_submissions(USERNAME);
+    deserializeJson(doc, response);
+  }
 
   // int streak = doc["data"]["userCalendar"]["streak"];
   // int totalDays = doc["data"]["userCalendar"]["totalActiveDays"];
@@ -158,6 +164,8 @@ void setup(void) {
       canvas.fillRect( 175 - 25*i, 165 - 25*j, 20, 20, lgfx::color888(block_color, block_color, block_color));
     }
   }
+
+  canvas.fillRect(177, 187 - 25 * days_last_thisweek, 16, 2, lgfx::color888(0, 0, 0));
 
   // // 如果需要一些文字。
   // char buf[32] = {0};

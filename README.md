@@ -9,7 +9,7 @@ I enjoy tracking my working progress — it’s motivating to see the work accum
 
 The current features includes:
 1. Automatically fetching recent submission records from LeetCode CN (No account login required).
-2. Updates every 4 hours. (The maximum sleep interval allowed by CoreInk's API).
+2. Update every 4 hours. (The maximum sleep interval allowed by CoreInk's API).
 
 ### **Screenshot:**
 
@@ -25,7 +25,7 @@ The current features includes:
 
 ## **Installation and Usage**
 
-Recommend to use [https://platformio.org/]PlatformIO for this project.
+Recommend to use [PlatformIO](https://platformio.org/) for this project.
 
 1. Create a new project in PlatformIO.
 
