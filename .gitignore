@@ -3,3 +3,24 @@
 .vscode/c_cpp_properties.json
 .vscode/launch.json
 .vscode/ipch
+
+# 配置文件（包含敏感信息）
+src/config.h
+
+# 编译输出
+*.bin
+*.hex
+*.elf
+*.map
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 临时文件
+*.tmp
+*.temp
+*~
+
+# 日志文件
+*.log

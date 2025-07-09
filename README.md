@@ -5,6 +5,41 @@ This project uses the M5Stack CoreInk to show daily LeetCode submission activity
 ## **Introduction**
 
 This project is designed for the [M5Stack CoreInk](https://docs.m5stack.com/en/core/coreink).
+I enjoy tracking my working progress — it's motivating to see the work accumulate over time. That lead me to build a dashboard on my desk to check my LeetCode progress. Since LeetCode submission data doesn't change frequently, updating once a day is more than enough. The low-power, always-visible nature of an e-ink display makes it a great fit for this kind of passive tracking.
+
+The current features includes:
+1. Automatically fetching recent submission records from LeetCode CN (No account login required).
+2. Smart scheduling: Updates every hour during work hours (10:00-22:00), sleeps during night hours (22:00-10:00).
+3. Intelligent screen updates: Only refreshes when new submissions are detected.
+4. Low power consumption with optimized WiFi usage.
+
+## **Setup Instructions**
+
+### **1. Configuration**
+
+Before compiling, you need to create a configuration file:
+
+1. Copy `src/config.h.example` to `src/config.h`
+2. Edit `src/config.h` with your actual settings:
+   ```cpp
+   #define WIFI_SSID "Your_WiFi_SSID"
+   #define WIFI_PASSWORD "Your_WiFi_Password"
+   #define USERNAME "your-leetcode-username"
+   ```
+
+### **2. Compilation**
+
+Use PlatformIO to compile and upload the code to your M5Stack CoreInk.
+
+### **Screenshot:**
+
+![./src/figure.jpg](./src/figure.jpg "screenshot1")lendar for CoreInk**
+
+This project uses the M5Stack CoreInk to show daily LeetCode submission activity on an e-ink screen.
+
+## **Introduction**
+
+This project is designed for the [M5Stack CoreInk](https://docs.m5stack.com/en/core/coreink).
 I enjoy tracking my working progress — it’s motivating to see the work accumulate over time. That lead me to build a dashboard on my desk to check my LeetCode progress. Since LeetCode submission data doesn’t change frequently, updating once a day is more than enough. The low-power, always-visible nature of an e-ink display makes it a great fit for this kind of passive tracking.
 
 The current features includes:

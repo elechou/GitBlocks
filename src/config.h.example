@@ -1,0 +1,24 @@
+/*
+*******************************************************************************
+* 配置文件示例
+* 复制此文件并重命名为 config.h，然后填入你的实际配置
+*******************************************************************************
+*/
+
+#ifndef CONFIG_H
+#define CONFIG_H
+
+// WiFi 配置
+#define WIFI_SSID "Your_WiFi_SSID"
+#define WIFI_PASSWORD "Your_WiFi_Password"
+
+// LeetCode 用户名
+#define USERNAME "your-leetcode-username"
+
+// 时区配置
+#define NTP_TIMEZONE "JST-9"
+#define NTP_SERVER1 "ntp.nict.jp"
+#define NTP_SERVER2 "ntp.aliyun.com"
+#define NTP_SERVER3 "ntp1.aliyun.com"
+
+#endif // CONFIG_H
