@@ -184,7 +184,7 @@ void setup(void) {
         // 减少WiFi连接等待时间，避免长时间高功耗
         unsigned long wifiStartTime = millis();
         while (WiFi.status() != WL_CONNECTED && millis() - wifiStartTime < 15000) {
-            delay(500);
+            delay(5000);
         }
         
         // 如果WiFi连接失败，直接进入睡眠模式
@@ -201,7 +201,7 @@ void setup(void) {
         // 减少NTP同步等待时间
         unsigned long ntpStartTime = millis();
         while (sntp_get_sync_status() != SNTP_SYNC_STATUS_COMPLETED && millis() - ntpStartTime < 10000) {
-            delay(500);
+            delay(5000);
         }
 
         time_t t = time(nullptr) + 1;
@@ -243,7 +243,7 @@ void setup(void) {
     
     unsigned long wifiStartTime = millis();
     while (WiFi.status() != WL_CONNECTED && millis() - wifiStartTime < 15000) {
-        delay(100);
+        delay(1000);
     }
     
     if (WiFi.status() == WL_CONNECTED) {
@@ -264,7 +264,7 @@ void setup(void) {
                 WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
                 wifiStartTime = millis();
                 while (WiFi.status() != WL_CONNECTED && millis() - wifiStartTime < 10000) {
-                    delay(100);
+                    delay(1000);
                 }
                 
                 if (WiFi.status() == WL_CONNECTED) {
@@ -298,14 +298,14 @@ void setup(void) {
             }
         }
         
-        if (!dataFetchSuccess) {
-            // 完全无法获取数据，延长睡眠时间后重试
-            M5.Display.sleep();
-            M5.Rtc.clearIRQ();
-            M5.Rtc.setAlarmIRQ(1800); // 30分钟后重试
-            M5.Power.powerOff();
-            return;
-        }
+        // if (!dataFetchSuccess) {
+        //     // 完全无法获取数据，延长睡眠时间后重试
+        //     M5.Display.sleep();
+        //     M5.Rtc.clearIRQ();
+        //     M5.Rtc.setAlarmIRQ(1800); // 30分钟后重试
+        //     M5.Power.powerOff();
+        //     return;
+        // }
     } else {
         // 成功获取数据，缓存起来备用
         preferences.putString("cachedData", response);
@@ -361,20 +361,11 @@ void setup(void) {
     
     if (currentTime.hours >= 22) {
         // 晚上22点后，睡眠到第二天早上10点
-        int hoursUntil10AM = (24 - currentTime.hours) + 10;
-        sleepDuration = hoursUntil10AM * 3600 - currentTime.minutes * 60 - currentTime.seconds;
-    } else if (failureCount > 0) {
-        // 根据失败次数调整重试间隔：适度增加重试频率，但不过于激进
-        if (failureCount >= 6) {
-            sleepDuration = 5400; // 1.5小时（连续失败太多次，可能是长期问题）
-        } else if (failureCount >= 3) {
-            sleepDuration = 2700; // 45分钟（中等频率重试）
-        } else {
-            sleepDuration = 1800; // 30分钟（较频繁重试）
-        }
+        int hoursUntil8AM = (24 - currentTime.hours) + 8;
+        sleepDuration = hoursUntil8AM * 3600 - currentTime.minutes * 60 - currentTime.seconds;
     } else {
         // 正常时间，1小时后唤醒
-        sleepDuration = 3600;
+        sleepDuration = 4 * 3600;
     }
     
     M5.Rtc.setAlarmIRQ(sleepDuration);
