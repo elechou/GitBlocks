@@ -1,98 +1,90 @@
-## **Leetcode Calendar for CoreInk**
+## LeetCode Calendar for CoreInk
 
-This project uses the M5Stack CoreInk to show daily LeetCode submission activity on an e-ink screen.
+This project displays your daily LeetCode submission activity on an e-ink screen using the M5Stack CoreInk.
 
-## **Introduction**
+## Introduction
 
-This project is designed for the [M5Stack CoreInk](https://docs.m5stack.com/en/core/coreink).
-I enjoy tracking my working progress — it's motivating to see the work accumulate over time. That lead me to build a dashboard on my desk to check my LeetCode progress. Since LeetCode submission data doesn't change frequently, updating once a day is more than enough. The low-power, always-visible nature of an e-ink display makes it a great fit for this kind of passive tracking.
+This project targets the [M5Stack CoreInk](https://docs.m5stack.com/en/core/coreink).
+I enjoy tracking my progress — it’s motivating to see the work accumulate over time. That led me to build a small desktop dashboard to visualize my LeetCode activity. Since LeetCode submission data doesn't change frequently, updating a few times per day is enough. The low‑power, always‑visible nature of an e‑ink display makes it a great fit for passive tracking.
 
-The current features includes:
-1. Automatically fetching recent submission records from LeetCode CN (No account login required).
-2. Smart scheduling: Updates every hour during work hours (10:00-22:00), sleeps during night hours (22:00-10:00).
-3. Intelligent screen updates: Only refreshes when new submissions are detected.
-4. Low power consumption with optimized WiFi usage.
+Current features include:
+1. Automatically fetch recent submission records from LeetCode (CN site) — no account login required.
+2. Smart scheduling: active during the day, sleeps at night (sleeps until 10:00).
+3. Intelligent updates: refresh only when new submissions are detected.
+4. Low power consumption via optimized Wi‑Fi usage.
 
-## **Setup Instructions**
+### Screenshot
 
-### **1. Configuration**
+![Screenshot](./src/figure.jpg)
+
+## Setup Instructions
+
+### 1) Configuration
 
 Before compiling, you need to create a configuration file:
 
-1. Copy `src/config.h.example` to `src/config.h`
-2. Edit `src/config.h` with your actual settings:
+1. Copy `src/config.h.example` to `src/config.h`.
+2. Edit `src/config.h` with your settings:
    ```cpp
    #define WIFI_SSID "Your_WiFi_SSID"
    #define WIFI_PASSWORD "Your_WiFi_Password"
    #define USERNAME "your-leetcode-username"
+   // Optional: timezone and NTP servers
+   #define NTP_TIMEZONE "JST-9"
+   #define NTP_SERVER1 "ntp.nict.jp"
+   #define NTP_SERVER2 "ntp.aliyun.com"
+   #define NTP_SERVER3 "ntp1.aliyun.com"
    ```
 
-### **2. Compilation**
-
+### 2) Build and Upload
 Use PlatformIO to compile and upload the code to your M5Stack CoreInk.
 
-### **Screenshot:**
+### Libraries and References
 
-![./src/figure.jpg](./src/figure.jpg "screenshot1")lendar for CoreInk**
+ 1. [m5stack/M5GFX](https://github.com/m5stack/M5GFX)
+ 2. [m5stack/M5Unified](https://github.com/m5stack/M5Unified)
+ 3. [m5stack/M5Core-Ink](https://github.com/m5stack/M5Core-Ink) (conflicts with M5Unified)
+ 4. [bblanchon/ArduinoJson](https://github.com/bblanchon/ArduinoJson)
+ 5. [如何在不登录的情况下获取LeetCode-CN用户提交记录](https://blog.csdn.net/qq_32424059/article/details/106071201)
 
-This project uses the M5Stack CoreInk to show daily LeetCode submission activity on an e-ink screen.
+## Installation and Usage
 
-## **Introduction**
+Use [PlatformIO](https://platformio.org/) for this project.
 
-This project is designed for the [M5Stack CoreInk](https://docs.m5stack.com/en/core/coreink).
-I enjoy tracking my working progress — it’s motivating to see the work accumulate over time. That lead me to build a dashboard on my desk to check my LeetCode progress. Since LeetCode submission data doesn’t change frequently, updating once a day is more than enough. The low-power, always-visible nature of an e-ink display makes it a great fit for this kind of passive tracking.
+ 1. Create a new project in PlatformIO.
 
-The current features includes:
-1. Automatically fetching recent submission records from LeetCode CN (No account login required).
-2. Update every 4 hours. (The maximum sleep interval allowed by CoreInk's API).
+ 2. Add the following libraries:
+    - m5stack/M5GFX@^0.2.6
+    - m5stack/M5Unified@^0.2.5
+    - bblanchon/ArduinoJson@^7.3.1
 
-### **Screenshot:**
+ 3. Copy the code from [`src/main.cpp`](./src/main.cpp) into your project (this repo uses a single editable file) and edit `src/config.h`.
 
-![./src/figure.jpg](./src/figure.jpg "screenshot1")
+ 4. Build and upload to your CoreInk.
 
-### **Libraries and Recommended Reads:**
+## FAQ
 
-1. [m5stack/M5GFX](https://github.com/m5stack/M5GFX)
-2. [m5stack/M5Unified](https://github.com/m5stack/M5Unified)
-3. [m5stack/M5Core-Ink](https://github.com/m5stack/M5Core-Ink)(Conflicts with M5Unified.)
-4. [bblanchon/ArduinoJson](https://github.com/bblanchon/ArduinoJson)
-5. [如何在不登录的情况下获取LeetCode-CN用户提交记录](https://blog.csdn.net/qq_32424059/article/details/106071201)
+Q:
+> How do I configure my own settings?
 
-## **Installation and Usage**
+A:
+```cpp
+// Edit src/config.h
+#define WIFI_SSID "******"
+#define WIFI_PASSWORD "******"
+#define USERNAME "******" // Your LeetCode username
+```
+If necessary, handle any concerns around storing plaintext passwords yourself.
 
-Recommend to use [PlatformIO](https://platformio.org/) for this project.
+## Changelog
 
-1. Create a new project in PlatformIO.
+- 0.2.0 (Jul 15, 2025): Handled timeouts for LeetCode API requests.
+- 0.1.0 (Apr 05, 2025): Initial release.
 
-2. Add the following libraries:
-    1. m5stack/M5GFX@^0.2.6
-	2. m5stack/M5Unified@^0.2.5
-	3. bblanchon/ArduinoJson@^7.3.1
+## License
 
-3. Copy all the codes in [main.cpp](./src/main.cpp) to yours.(This project only has one file to edit.)
+MIT License.
 
-4. Build and upload to your CoreInk.
+## Contact
 
-## **FAQ**
-
-**Q:**
-> How to configure my own infos?
-
-**A:**
-> You can change the configures at the beginning of the main.cpp.  
-> #define WIFI_SSID "\*\*\*\*\*\*"  
-> #define WIFI_PASSWORD "\*\*\*\*\*\*"  
-> #define USERNAME "\*\*\*\*\*\*"  // Your Leetcode Username.  
-> If necessary, you will need to handle the issue of **plaintext passwords** yourself.
-
-## **Change log**
-
-- **0.1.0(Arp.5 2024):** Initial release
-
-## **License**
-
-This is released under the MIT License.
-
-## **Contact**
-
-If you have any questions or comments about this project, please contact Shou Qiu (<qiusots@gmail.com>).
+Questions or feedback are welcome: Shou Qiu <qiusots@gmail.com>.

@@ -364,7 +364,7 @@ void setup(void) {
         int hoursUntil8AM = (24 - currentTime.hours) + 8;
         sleepDuration = hoursUntil8AM * 3600 - currentTime.minutes * 60 - currentTime.seconds;
     } else {
-        // 正常时间，1小时后唤醒
+        // 正常时间，4小时后唤醒
         sleepDuration = 4 * 3600;
     }
     
